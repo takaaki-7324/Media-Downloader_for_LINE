@@ -86,18 +86,5 @@ def line(event):
                     line_bot_api.reply_message(event.reply_token,msg)
                     dl.Runner()
 
-
-
-    # param = set(["/mp3","/mov","/nomov"])
-    # if "/mp3" in message.startswith(tag):
-    #     url = message.split()[1]
-    #     err = reply_message(event,tag,url,line_bot_api)
-    #     if not err:
-    #         dl = Download(url)
-            
-
-    # else:
-    #     act_reply_message(event,get_id,message,line_bot_api)
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="9000",debug=True)
+    app.run(host="0.0.0.0", port="9000")
