@@ -1,5 +1,5 @@
 import os
-
+from glob import glob
 class TestRunner(object):
 
     def test_mp3_download(self,mp3):
@@ -38,3 +38,22 @@ class TestRunner(object):
         os.remove(f"./{path}.mp4")
         file_exists= os.path.isfile(f"./{path}.mp4")
         assert not file_exists
+
+    def test_playlist(self,playlist):
+        dl,t1,t2 = playlist
+        dl.downloader()
+        fileExtensions = set(["mp4", "m4a","mkv","webm","mp3"])
+        file_list = []
+        for ext in fileExtensions:
+            file_list.extend(glob("%s*.%s" % ("./",ext)))
+
+        assert len(file_list) == 2
+        assert t1 in str(set(file_list))
+        assert t2 in str(set(file_list))
+
+    def test_playlist_delete(self,playlist):
+        _,t1,t2 = playlist
+        os.remove(f"./{t1}.m4a")
+        os.remove(f"./{t2}.m4a")
+        assert not os.path.isfile(f"./{t1}.m4a")
+        assert not os.path.isfile(f"./{t2}.m4a")
