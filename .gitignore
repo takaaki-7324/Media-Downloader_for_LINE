@@ -1,0 +1,9 @@
+__pycache__
+.env
+.vscode
+.pytest_cache
+media
+client_secrets.json
+credentials.json
+settings.yaml
+multi_process.py
