@@ -8,7 +8,7 @@
 - LINEからYoutube,tiktok,soundcloud,Twitter,dailymotion,ニコニコ動画から音楽・動画のダウンロードに対応しています。<p>
 - ダウンロード後は自動的に、変換→GoogleDriveにアップロード→LINEに完了通知を行います。
 - Youtubeのプレイリストにも対応しています。
-- 複数の音楽・動画の同時変換に対応し、GoogleDriveへの同時アップロードが行えます。(デフォルト4つ同時処理)
+- 複数の音楽・動画の同時変換に対応し、GoogleDriveへの同時アップロードが行えます。(デフォルト8つ同時処理)
 
 ## 前提条件
 - [LINE API](https://developers.line.biz/console/)を取得してください。
@@ -31,7 +31,7 @@ https://console.developers.google.com/<p>
 - ngrokを起動し`ngrok http -region=ap 9000` を実行します。
 - httpsから始まるURLをLINEの`Webhook URL`に末尾に`/callback`を追加して入力します。<p>
   <例> `https://2aeebc8adb35.ap.ngrok.io/callback`
-- LINEアプリから`!test` と入力してレスポンスがあれば完了です。
+- LINEアプリから`/help` と入力してレスポンスがあれば完了です。
 ## 使用方法
 - `docker-compose up -d`を実行<p>
 - ngrokを起動して`ngrok http -region=ap 9000` で起動
