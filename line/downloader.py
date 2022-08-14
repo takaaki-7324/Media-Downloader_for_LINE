@@ -29,8 +29,14 @@ class Download(object):
     # ダウンロードを行う
     def downloader(self):
         fmt = {
-                '/mp3': {'format':'bestaudio[ext=mp3]/bestaudio[ext=m4a]/bestaudio'},
-                '/mov': {'format':'bestvideo+bestaudio'}
+                '/mp3': {
+                    'format':'m4a/bestaudio/best',
+                    'postprocessors': [{  # Extract audio using ffmpeg
+                        'key': 'FFmpegExtractAudio',
+                        'preferredcodec': 'm4a',
+                    }]
+                },
+                '/mov': {'format':'bv[ext=webm]+ba[ext=webm]'}
             }
         opt = fmt.get(self.tag,{})
 
