@@ -25,3 +25,17 @@ services:
       - app
     networks:
       - default
+
+# linux/amd64, linux/arm and linux/arm64 のプラットフォームの場合は、以下を使用してください。
+  # ngrok:
+  #   container_name: ngrok
+  #   image: athombv/ngrok:latest
+  #   command: >
+  #           ngrok http
+  #           --region=ap
+  #           --authtoken=$NGROK_AUTH_TOKEN
+  #           app:9000
+  #   depends_on:
+  #     - app
+  #   networks:
+  #     - default
