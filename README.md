@@ -22,6 +22,11 @@
 OAuth 2.0 クライアントID の欄で右側の操作からダウンロードボタンをクリック。</br>
 - `client_secret.json`に名前を変更し、`credentials`ディレクトリに設置します。</br>
 
+- 認証を完了させるため、以下手順を実施します。
+  1. `python -m pip install pydrive`
+  2. `python check_auth.py` -- Googleアカウントにログインし、認証トークンが発行されるので`Enter verification code: `に貼り付けます。
+  3. `python -m pip uninstall -y pydrive` -- 以降は不要なので削除します。
+
 - [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
 
 - `.env.sample` を参考に`.env`を作成します。<p>
