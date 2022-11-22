@@ -2,8 +2,6 @@ __pycache__
 .env
 .vscode
 .pytest_cache
+*.json
 media
-client_secrets.json
-credentials.json
 settings.yaml
-multi_process.py

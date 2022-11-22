@@ -1,4 +1,6 @@
 from line.downloader import Download
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 import pytest
 
 
@@ -28,3 +30,13 @@ def playlist():
     dl = Download(listurl,tag,None,None)
     dl.dir = "./"
     return dl,title,title2
+
+@pytest.fixture
+def gcp_info():
+    # ファイル内容
+    string = "This is upload test file."
+
+    # GoogleDrive認証設定
+    gauth = GoogleAuth(settings_file="credentials/settings.yml")
+    drive = GoogleDrive(gauth)
+    return drive,string

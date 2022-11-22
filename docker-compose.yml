@@ -1,9 +1,25 @@
 version: '3.8'
+networks:
+  default:
 services:
   app:
+    container_name: line_bot
     build: .
     ports:
       - "9000:9000"
     volumes: 
       - ./credentials:/json/
       - ./media:/temp/
+    networks:
+      - default
+  ngrok:
+    container_name: ngrok
+    image: wernight/ngrok:latest
+    ports:
+      - 4040:4040
+    environment:
+      NGROK_PORT: app:9000
+    depends_on:
+      - app
+    networks:
+      - default

@@ -5,7 +5,6 @@ import os
 from yt_dlp import YoutubeDL
 from glob import glob
 from line.uploader import uploader
-from linebot.models import TextSendMessage
 class Download(object):
     def __init__(self,url,tag,lineapi,lineid):
         # ダウンロードURL

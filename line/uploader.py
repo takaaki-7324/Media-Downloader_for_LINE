@@ -2,9 +2,9 @@ import setting as s
 import math
 import os
 from mutagen.mp3 import MP3
+from line.messenger import push_message
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
-from line.messenger import push_message
 
 # GoogleDrive共有フォルダID
 MUSIC_FOLDER_ID = s.MUSIC_FOLDER_ID
@@ -12,12 +12,9 @@ VIDEO_FOLDER_ID = s.VIDEO_FOLDER_ID
 
 # コンテンツ
 def uploader(tag,data,dir,lineapi,lineid):
-    # 認証ファイル位置に移動
-    os.chdir('/json')
 
-    # GoogleDrive認証設定
-    gauth = GoogleAuth()
-    gauth.CommandLineAuth()
+    gauth = GoogleAuth(settings_file="credentials/settings.yml")
+    gauth.LocalWebserverAuth()
     drive = GoogleDrive(gauth)
 
     video_ext_dicts = {

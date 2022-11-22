@@ -46,6 +46,17 @@ jobs:
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
 
+    # Create Credentials
+    - name: Create Credentials
+      run: |
+        echo -n '$SECRET_INFO' > credentials/template_credentials.json
+        echo -n '$SECRET_INFO_CLIENT' > credentials/template_client_secret.json
+        envsubst < credentials/template_credentials.json > credentials/credentials.json
+        envsubst < credentials/template_client_secret.json > credentials/client_secret.json
+      env:
+        SECRET_INFO: ${{ secrets.SECRET_INFO }}
+        SECRET_INFO_CLIENT: ${{ secrets.SECRET_INFO_CLIENT }}
+
     # Running Pytest
     - name: Pytest
       id: pytest
