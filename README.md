@@ -13,7 +13,10 @@
 ## 前提条件
 - [LINE API](https://developers.line.biz/console/)を取得してください。
 - [GoogleDriveAPI](https://console.developers.google.com/apis/library/drive.googleapis.com)を有効にします。
-- docker-composeを準備してください。<p>
+- docker-composeを準備してください。
+- [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成してください。
+<p>
+
 ## 準備
 - [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスして「認証情報を作成」→ 「OAuthクライアントIDの作成」→　「アプリケーションの種類：デスクチップアプリ」→「名前：お好きな名前を入力」の順に進み、[作成]をクリック。</br>
 OAuth 2.0 クライアントID の欄で右側の操作からダウンロードボタンをクリック。</br>
