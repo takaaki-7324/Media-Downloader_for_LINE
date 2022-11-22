@@ -49,8 +49,10 @@ jobs:
     # Create Credentials
     - name: Create Credentials
       run: |
+        ls -la
         echo -n '$SECRET_INFO' > credentials/template_credentials.json
         envsubst < credentials/template_credentials.json > credentials/credentials.json
+        ls -la credentials/
       env:
         SECRET_INFO: ${{ secrets.SECRET_INFO }}
 
