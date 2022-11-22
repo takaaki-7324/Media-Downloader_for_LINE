@@ -20,7 +20,7 @@
 ## 準備
 - [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスして「認証情報を作成」→ 「OAuthクライアントIDの作成」→　「アプリケーションの種類：デスクチップアプリ」→「名前：お好きな名前を入力」の順に進み、[作成]をクリック。</br>
 OAuth 2.0 クライアントID の欄で右側の操作からダウンロードボタンをクリック。</br>
-- `client_secrets.json`に名前を変更し、`credentials`ディレクトリに設置します。</br>
+- `client_secret.json`に名前を変更し、`credentials`ディレクトリに設置します。</br>
 
 - [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
 
