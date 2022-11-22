@@ -14,7 +14,6 @@ VIDEO_FOLDER_ID = s.VIDEO_FOLDER_ID
 def uploader(tag,data,dir,lineapi,lineid):
 
     gauth = GoogleAuth(settings_file="credentials/settings.yml")
-    gauth.LocalWebserverAuth()
     drive = GoogleDrive(gauth)
 
     video_ext_dicts = {
