@@ -1,10 +1,14 @@
 #!/bin/env python
 import setting as s
+import re
+import os
 from line.downloader import Download
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 
 # アプリケーションフレームワーク
 app = Flask(__name__)
@@ -57,8 +61,10 @@ def line(event):
         try:
             tag,url = message.split()
         except ValueError:
-            msg = TextSendMessage(text="URLが指定されていません！")
-            line_bot_api.reply_message(event.reply_token,msg)
+            pattern = r"https?://[\w/:%#\$&\?\(\)~\.=\+\-]+"
+            if not re.match(pattern, url):
+                msg = TextSendMessage(text="URLが指定されていません！")
+                line_bot_api.reply_message(event.reply_token,msg)
         else:
             if tag in str(param):
                 if tag == "/mp3":
@@ -74,8 +80,8 @@ def line(event):
                 dl = Download(url,tag,line_bot_api,lineid)
                 try:
                     dl.downloader()
-                except Exception:
-                    msg = TextSendMessage(text="無効なURLです！")
+                except Exception as e:
+                    msg = TextSendMessage(text=f"エラーが発生しました。\n{e.args[0]}")
                     line_bot_api.reply_message(event.reply_token,msg)
                 else:
                     msg = TextSendMessage(text=(
@@ -87,4 +93,10 @@ def line(event):
                     dl.Runner()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="9000")
+    if os.path.isfile("credentials/credentials.json"):
+        app.run(host="0.0.0.0", port=9000)
+    else:
+        # GoogleDrive認証設定
+        gauth = GoogleAuth(settings_file="credentials/settings.yml")
+        gauth.CommandLineAuth()
+        drive = GoogleDrive(gauth)
