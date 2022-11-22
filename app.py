@@ -7,8 +7,6 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
 
 # アプリケーションフレームワーク
 app = Flask(__name__)
@@ -93,10 +91,4 @@ def line(event):
                     dl.Runner()
 
 if __name__ == "__main__":
-    if os.path.isfile("credentials/credentials.json"):
         app.run(host="0.0.0.0", port=9000)
-    else:
-        # GoogleDrive認証設定
-        gauth = GoogleAuth(settings_file="credentials/settings.yml")
-        gauth.CommandLineAuth()
-        drive = GoogleDrive(gauth)
