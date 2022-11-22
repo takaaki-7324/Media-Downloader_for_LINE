@@ -13,17 +13,22 @@
 ## 前提条件
 - [LINE API](https://developers.line.biz/console/)を取得してください。
 - [GoogleDriveAPI](https://console.developers.google.com/apis/library/drive.googleapis.com)を有効にします。
-- docker-composeを準備してください。<p>
+- docker-composeを準備してください。
+- [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成してください。
+<p>
+
 ## 準備
 - [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスして「認証情報を作成」→ 「OAuthクライアントIDの作成」→　「アプリケーションの種類：デスクチップアプリ」→「名前：お好きな名前を入力」の順に進み、[作成]をクリック。</br>
 OAuth 2.0 クライアントID の欄で右側の操作からダウンロードボタンをクリック。</br>
 - `client_secrets.json`に名前を変更し、`credentials`ディレクトリに設置します。</br>
 
+- [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
+
 - `.env.sample` を参考に`.env`を作成します。<p>
 (GoogleDriveの共有IDは `https://drive.google.com/drive/u/0/folders/` 以降の英数字を記入します。)
 - `docker-compose up --build`を実行して認証情報の設定を行います。
 - 認証後は Ctrl + C で一旦停止し、`docker-compose up -d` で起動します。<p>
-- http://localhost:4040 にアクセスして、httpsから始まるURLを[LINE API](https://developers.line.biz/console/)の`Messaging API settings`に移動し、Webhook URLに記載します。この時、/callbackを末尾に付けてください。<p>
+- http://localhost:4040 にアクセスするか、[NGROKのEndpointで確認](https://dashboard.ngrok.com/cloud-edge/endpoints)して、httpsから始まるURLを[LINE API](https://developers.line.biz/console/)の`Messaging API settings`に移動し、Webhook URLに記載します。この時、/callbackを末尾に付けてください。<p>
   <例> `https://2aeebc8adb35.ap.ngrok.io/callback`
 - [Verify]をクリックして`Success`となっていればOKです。
 - LINEアプリから`/help` と入力してレスポンスがあれば完了です。
