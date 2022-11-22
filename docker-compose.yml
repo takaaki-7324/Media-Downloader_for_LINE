@@ -19,6 +19,8 @@ services:
       - 4040:4040
     environment:
       NGROK_PORT: app:9000
+      NGROK_REGION: ap
+      NGROK_AUTH: ${NGROK_AUTH_TOKEN}
     depends_on:
       - app
     networks:
