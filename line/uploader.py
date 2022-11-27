@@ -51,7 +51,7 @@ def uploader(tag,data,dir,lineapi,lineid):
     # GoogleDriveにアップロード
     f.Upload()
 
-    # # GoogleDriveのファイルIDを取得
+    # GoogleDriveのファイルIDを取得
     file_id = drive.ListFile(
         {'q': 'title =\"' + title +  '\"'}
     ).GetList()[0]['id']
