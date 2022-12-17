@@ -18,25 +18,26 @@
 <p>
 
 ## 準備
-- [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスして「認証情報を作成」→ 「OAuthクライアントIDの作成」→　「アプリケーションの種類：デスクチップアプリ」→「名前：お好きな名前を入力」の順に進み、[作成]をクリック。</br>
+1. [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスして「認証情報を作成」→ 「OAuthクライアントIDの作成」→　「アプリケーションの種類：デスクチップアプリ」→「名前：お好きな名前を入力」の順に進み、[作成]をクリック。</br>
 OAuth 2.0 クライアントID の欄で右側の操作からダウンロードボタンをクリック。</br>
-- `client_secret.json`に名前を変更し、`credentials`ディレクトリに設置します。</br>
+2. `client_secret.json`に名前を変更し、`./credentials`ディレクトリに設置します。</br>
 
-- 認証を完了させるため、以下手順を実施します。
-  1. `python -m pip install pydrive`
-  2. `python check_auth.py` -- Googleアカウントにログインし、認証トークンが発行されるので`Enter verification code: `に貼り付けます。
-  3. `python -m pip uninstall -y pydrive` -- 以降は不要なので削除します。
+3. [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
 
-- [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
-
-- `.env.sample` を参考に`.env`を作成します。<p>
+4. `.env.sample` を参考に`.env`を作成します。<p>
 (GoogleDriveの共有IDは `https://drive.google.com/drive/u/0/folders/` 以降の英数字を記入します。)
-- `docker-compose up --build`を実行して認証情報の設定を行います。
-- 認証後は Ctrl + C で一旦停止し、`docker-compose up -d` で起動します。<p>
-- http://localhost:4040 にアクセスするか、[NGROKのEndpointで確認](https://dashboard.ngrok.com/cloud-edge/endpoints)して、httpsから始まるURLを[LINE API](https://developers.line.biz/console/)の`Messaging API settings`に移動し、Webhook URLに記載します。この時、/callbackを末尾に付けてください。<p>
-  <例> `https://2aeebc8adb35.ap.ngrok.io/callback`
-- [Verify]をクリックして`Success`となっていればOKです。
-- LINEアプリから`/help` と入力してレスポンスがあれば完了です。
+5. `docker-compose up --build -d `を実行しDockerを起動します。
+6. 以下を実行しGoogle Auth認証を行います。※初回のみ<br>
+  `docker-compose exec app python -m pip install pytest`<br>
+  `docker-compose exec app pytest tests/test_upload.py`<br>
+  以下が表示されたら検証コードを貼り付けてください。<br>
+  `Enter verification code:` <ここに検証コードを貼り付け>
+<p>
+
+7. [NGROKのEndpointで確認](https://dashboard.ngrok.com/cloud-edge/endpoints)して、httpsから始まるURLを[LINE API](https://developers.line.biz/console/)の`Messaging API settings`に移動し、Webhook URLに記載します。<br>この時、/callbackを末尾に付けてください。<p>
+  <例> `https://2aeebc8adb35.ap.ngrok.io/callback`<br>
+  [Verify]をクリックして`Success`となっていればOKです。<br>
+  LINEアプリから`/help` と入力してレスポンスがあれば完了です。
 ## 使用方法
 - LINE から以下のように入力して動作します。
 - /mp3 URL -- 音楽を取得できます。
