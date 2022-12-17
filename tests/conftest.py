@@ -38,5 +38,6 @@ def gcp_info():
 
     # GoogleDrive認証設定
     gauth = GoogleAuth(settings_file="credentials/settings.yml")
+    gauth.CommandLineAuth()
     auth = GoogleDrive(gauth)
     return auth,string
