@@ -3,6 +3,7 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from oauth2client.service_account import ServiceAccountCredentials
 import pytest
+import os
 import glob
 
 url = "https://www.youtube.com/watch?v=4pqJA7aiVJc"
@@ -39,8 +40,11 @@ def gcp_info():
 
     # 認証
     scope = "https://www.googleapis.com/auth/drive"
-    json_file = glob.glob("/opt/app/credentials/*.json")[0]
-    gauth = GoogleAuth()
-    gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file, scope)
-    auth = GoogleDrive(gauth)
-    return auth,string
+    json_file = glob.glob("credentials/*.json")[0]
+    if os.path.isfile(json_file):
+        gauth = GoogleAuth()
+        gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file, scope)
+        auth = GoogleDrive(gauth)
+        return auth,string
+    else:
+        print ("File Not Found!")
