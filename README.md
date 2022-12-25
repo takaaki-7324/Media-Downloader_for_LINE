@@ -18,14 +18,17 @@
 <p>
 
 ## 準備
-1. [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスしてサービスアカウントのメールアドレスをクリック → 「キー」タブに移動 →　「鍵を追加：新しい鍵を作成」→ JSONファイルがダウンロードされるので、そのまま`Media-Downloader_for_LINE/`のフォルダ以下に設置。</br>
+1. [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスしてサービスアカウントを作成(省略可は省略する)。のメールアドレスをクリック → 「キー」タブに移動 →　「鍵を追加」→「新しい鍵を作成」→ 「JSONタイプ」→「作成」でJSONファイルがダウンロードされるので、そのまま`Media-Downloader_for_LINE/credentials`のフォルダ以下に設置。</br>
+※ サービスアカウントのメールアドレスは後で使用しますので、控えておいてください。
 
 2. [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
 
-3. `.env.sample` を参考に`.env`を作成します。<p>
+3. Google DriveでMUSIC用、VIDEO用に2つフォルダを作成します。この時作成したフォルダを共有する相手は先ほどのサービスアカウントのメールアドレスを追加します。
+4. `.env.sample` を参考に`.env`を作成します。<p>
 (GoogleDriveの共有IDは `https://drive.google.com/drive/u/0/folders/` 以降の英数字を記入します。)
 
-4. `docker-compose up --build -d `を実行しDockerを起動します。
+
+5. `docker-compose up --build -d `を実行しDockerを起動します。
 
 5. [NGROKのEndpointで確認](https://dashboard.ngrok.com/cloud-edge/endpoints)して、httpsから始まるURLを[LINE API](https://developers.line.biz/console/)の`Messaging API settings`に移動し、Webhook URLに記載します。<br>この時、/callbackを末尾に付けてください。<p>
   <例> `https://2aeebc8adb35.ap.ngrok.io/callback`<br>

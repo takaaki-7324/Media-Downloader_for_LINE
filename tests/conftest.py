@@ -40,7 +40,7 @@ def gcp_info():
 
     # 認証
     scope = "https://www.googleapis.com/auth/drive"
-    json_file = glob.glob("*.json")[0]
+    json_file = glob.glob("credentials/*.json")[0]
     if os.path.isfile(json_file):
         gauth = GoogleAuth()
         gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file, scope)
