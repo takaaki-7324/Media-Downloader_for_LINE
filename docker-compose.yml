@@ -8,7 +8,6 @@ services:
     ports:
       - "9000:9000"
     volumes: 
-      - ./credentials:/opt/app/credentials
       - ./media:/temp/
     networks:
       - line_app
