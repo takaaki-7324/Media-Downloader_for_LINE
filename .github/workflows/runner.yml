@@ -49,6 +49,7 @@ jobs:
     # Create Credentials
     - name: Create Credentials
       run: |
+        mkdir credentials
         echo -n '$SERVICE_ACCOUNT' > credentials/template_service_account.json
         envsubst < credentials/template_service_account.json > credentials/service_account.json
       env:
