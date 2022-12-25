@@ -1,8 +1,9 @@
 from line.downloader import Download
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from oauth2client.service_account import ServiceAccountCredentials
 import pytest
-
+import glob
 
 url = "https://www.youtube.com/watch?v=4pqJA7aiVJc"
 title = "@_BGM_DOVA-SYNDROME_OFFICIAL_YouTube_CHANNEL"
@@ -36,8 +37,10 @@ def gcp_info():
     # ファイル内容
     string = "This is upload test file."
 
-    # GoogleDrive認証設定
-    gauth = GoogleAuth(settings_file="credentials/settings.yml")
-    gauth.CommandLineAuth()
+    # 認証
+    scope = "https://www.googleapis.com/auth/drive"
+    json_file = glob.glob("credentials/*.json")[0]
+    gauth = GoogleAuth()
+    gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file, scope)
     auth = GoogleDrive(gauth)
     return auth,string

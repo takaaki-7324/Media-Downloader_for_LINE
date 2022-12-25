@@ -1,10 +1,12 @@
 import setting as s
 import math
 import os
+import glob
 from mutagen.mp3 import MP3
 from line.messenger import push_message
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from oauth2client.service_account import ServiceAccountCredentials
 
 # GoogleDrive共有フォルダID
 MUSIC_FOLDER_ID = s.MUSIC_FOLDER_ID
@@ -13,7 +15,10 @@ VIDEO_FOLDER_ID = s.VIDEO_FOLDER_ID
 # コンテンツ
 def uploader(tag,data,dir,lineapi,lineid):
 
-    gauth = GoogleAuth(settings_file="credentials/settings.yml")
+    scope = "https://www.googleapis.com/auth/drive"
+    json_file = glob.glob("credentials/*.json")[0]
+    gauth = GoogleAuth()
+    gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file, scope)
     drive = GoogleDrive(gauth)
 
     video_ext_dicts = {

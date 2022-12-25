@@ -18,26 +18,16 @@
 <p>
 
 ## 準備
-1. [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスして「認証情報を作成」→ 「OAuthクライアントIDの作成」→　「アプリケーションの種類：デスクチップアプリ」→「名前：お好きな名前を入力」の順に進み、[作成]をクリック。</br>
-OAuth 2.0 クライアントID の欄で右側の操作からダウンロードボタンをクリック。</br>
-2. `client_secret.json`に名前を変更し、`./credentials`ディレクトリに設置します。</br>
+1. [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスしてサービスアカウントのメールアドレスをクリック → 「キー」タブに移動 →　「鍵を追加：新しい鍵を作成」→ JSONファイルがダウンロードされるので、そのまま`credentials/`配下のフォルダに設置。</br>
 
-3. [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
+2. [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
 
-4. `.env.sample` を参考に`.env`を作成します。<p>
+3. `.env.sample` を参考に`.env`を作成します。<p>
 (GoogleDriveの共有IDは `https://drive.google.com/drive/u/0/folders/` 以降の英数字を記入します。)
 
-5. 以下を実行しGoogle Auth認証を行います。※初回のみ<br>
-  `python -m pip install -y PyDrive` --> 一時的にインストール<br>
-  `python check_auth.py` --> 認証用のスクリプト<br>
-  以下が表示されたら検証コードを貼り付けてください。<br>
-  `Enter verification code:` <ここに検証コードを貼り付け><br>
-  `python -m pip uninstall -y PyDrive` --> 終わったら削除<br>
-<p>
+4. `docker-compose up --build -d `を実行しDockerを起動します。
 
-6. `docker-compose up --build -d `を実行しDockerを起動します。
-
-7. [NGROKのEndpointで確認](https://dashboard.ngrok.com/cloud-edge/endpoints)して、httpsから始まるURLを[LINE API](https://developers.line.biz/console/)の`Messaging API settings`に移動し、Webhook URLに記載します。<br>この時、/callbackを末尾に付けてください。<p>
+5. [NGROKのEndpointで確認](https://dashboard.ngrok.com/cloud-edge/endpoints)して、httpsから始まるURLを[LINE API](https://developers.line.biz/console/)の`Messaging API settings`に移動し、Webhook URLに記載します。<br>この時、/callbackを末尾に付けてください。<p>
   <例> `https://2aeebc8adb35.ap.ngrok.io/callback`<br>
   [Verify]をクリックして`Success`となっていればOKです。<br>
   LINEアプリから`/help` と入力してレスポンスがあれば完了です。
