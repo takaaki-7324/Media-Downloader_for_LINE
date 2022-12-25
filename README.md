@@ -18,7 +18,7 @@
 <p>
 
 ## 準備
-1. [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスしてサービスアカウントのメールアドレスをクリック → 「キー」タブに移動 →　「鍵を追加：新しい鍵を作成」→ JSONファイルがダウンロードされるので、そのまま`credentials/`配下のフォルダに設置。</br>
+1. [GCP の認証情報](https://console.cloud.google.com/apis/credentials) にアクセスしてサービスアカウントのメールアドレスをクリック → 「キー」タブに移動 →　「鍵を追加：新しい鍵を作成」→ JSONファイルがダウンロードされるので、そのまま`Media-Downloader_for_LINE/`のフォルダ以下に設置。</br>
 
 2. [NGROKアカウント準備](https://dashboard.ngrok.com/get-started/setup)NGROKアカウントを作成し、Connect your accountのトークンを確認します。
 
