@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.8','3.9','3.10']
+        python-version: ['3.9','3.10','3.11']
 
     steps:
     - name: Checkout
@@ -45,17 +45,6 @@ jobs:
     # check python version
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
-
-    # Create Credentials
-    - name: Create Credentials
-      run: |
-        echo -n '$SECRET_INFO' > credentials/template_credentials.json
-        echo -n '$SECRET_INFO_CLIENT' > credentials/template_client_secret.json
-        envsubst < credentials/template_credentials.json > credentials/credentials.json
-        envsubst < credentials/template_client_secret.json > credentials/client_secret.json
-      env:
-        SECRET_INFO: ${{ secrets.SECRET_INFO }}
-        SECRET_INFO_CLIENT: ${{ secrets.SECRET_INFO_CLIENT }}
 
     # Running Pytest
     - name: Pytest
