@@ -37,4 +37,4 @@ services:
   #   depends_on:
   #     - app
   #   networks:
-  #     - default
+  #     - line_app
