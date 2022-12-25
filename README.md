@@ -26,13 +26,16 @@ OAuth 2.0 クライアントID の欄で右側の操作からダウンロード�
 
 4. `.env.sample` を参考に`.env`を作成します。<p>
 (GoogleDriveの共有IDは `https://drive.google.com/drive/u/0/folders/` 以降の英数字を記入します。)
-5. `docker-compose up --build -d `を実行しDockerを起動します。
-6. 以下を実行しGoogle Auth認証を行います。※初回のみ<br>
-  `docker-compose exec app python -m pip install pytest`<br>
-  `docker-compose exec app pytest tests/test_upload.py`<br>
+
+5. 以下を実行しGoogle Auth認証を行います。※初回のみ<br>
+  `python -m pip install -y PyDrive` --> 一時的にインストール<br>
+  `python check_auth.py` --> 認証用のスクリプト<br>
   以下が表示されたら検証コードを貼り付けてください。<br>
-  `Enter verification code:` <ここに検証コードを貼り付け>
+  `Enter verification code:` <ここに検証コードを貼り付け><br>
+  `python -m pip uninstall -y PyDrive` --> 終わったら削除<br>
 <p>
+
+6. `docker-compose up --build -d `を実行しDockerを起動します。
 
 7. [NGROKのEndpointで確認](https://dashboard.ngrok.com/cloud-edge/endpoints)して、httpsから始まるURLを[LINE API](https://developers.line.biz/console/)の`Messaging API settings`に移動し、Webhook URLに記載します。<br>この時、/callbackを末尾に付けてください。<p>
   <例> `https://2aeebc8adb35.ap.ngrok.io/callback`<br>

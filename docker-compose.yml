@@ -1,6 +1,6 @@
 version: '3.8'
 networks:
-  default:
+  line_app:
 services:
   app:
     container_name: line_bot
@@ -11,7 +11,7 @@ services:
       - ./credentials:/opt/app/credentials
       - ./media:/temp/
     networks:
-      - default
+      - line_app
   ngrok:
     container_name: ngrok
     image: wernight/ngrok:latest
@@ -19,12 +19,12 @@ services:
       - 4040:4040
     environment:
       NGROK_PORT: app:9000
-      NGROK_REGION: ap
+      NGROK_REGION: us
       NGROK_AUTH: ${NGROK_AUTH_TOKEN}
     depends_on:
       - app
     networks:
-      - default
+      - line_app
 
 # linux/amd64, linux/arm and linux/arm64 のプラットフォームの場合は、以下を使用してください。
   # ngrok:

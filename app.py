@@ -1,7 +1,6 @@
 #!/bin/env python
 import setting as s
 import re
-import os
 from line.downloader import Download
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
