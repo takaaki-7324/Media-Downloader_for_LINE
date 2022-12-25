@@ -2,7 +2,7 @@
 
 ![python](https://img.shields.io/badge/Python-3.9+-skyblue?style=plastic&logo=python)
 ![docker-compose-v3](https://img.shields.io/badge/docker_compose-v3-blue?style=plastic&logo=docker)
-![tool-version](https://img.shields.io/badge/tool-v1.2.0-darkred?style=plastic&logo=pastebin)
+![tool-version](https://img.shields.io/badge/tool-v1.3.0-darkred?style=plastic&logo=pastebin)
 
 ## ツールについて
 - LINEからYoutube,tiktok,soundcloud,Twitter,dailymotion,ニコニコ動画から音楽・動画のダウンロードに対応しています。<p>
