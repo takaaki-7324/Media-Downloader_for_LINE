@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.12
 ADD . /opt/app
 WORKDIR /opt/app
 RUN apt update && apt install -y ffmpeg
