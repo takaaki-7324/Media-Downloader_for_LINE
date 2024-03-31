@@ -1,10 +1,8 @@
 #!/bin/env python3
-import asyncio
-from concurrent.futures.process import ProcessPoolExecutor
-import os
 from yt_dlp import YoutubeDL
 from glob import glob
 from line.uploader import uploader
+import os
 
 
 class Download(object):
@@ -48,7 +46,6 @@ class Download(object):
             "restrictfilenames": "True",
             "quiet": "True",
             "no_warnings": "True",
-            "debug_printtraffic": "False",
             "default_search": "error",
         }
         # フォーマット形成
@@ -62,10 +59,9 @@ class Download(object):
         fileExtensions = set(["mp4", "m4a", "mkv", "webm", "mp3"])
         file_list = []
         for ext in fileExtensions:
-            file_list.extend(glob("%s*.%s" % (self.dir, ext)))
-
+            file_list.extend(glob(f"{self.dir}*.{ext}"))
         for file in file_list:
-            self.convert(data=file)
+            self.convert(file)
 
     #     loop = asyncio.new_event_loop()
     #     loop.run_until_complete(self.multi_convert(loop, file_list))
@@ -75,6 +71,7 @@ class Download(object):
     #     executor = ProcessPoolExecutor()
     #     queue = asyncio.Queue()
     #     [queue.put_nowait(files) for files in file_list]
+    #     print("Async")
 
     #     async def proc(q):
     #         while not q.empty():
@@ -86,28 +83,28 @@ class Download(object):
     #     return await asyncio.wait(tasks)
 
     # 統合変換処理部分
-    def convert(self, data):
+    def convert(self, file):
         ext_dict = {
             ".m4a": ['ffmpeg -y -i "%s" -ab 256k "%s" -loglevel quiet', "/mp3"],
             ".mp4": ['ffmpeg -y -i "%s" -ab 256k "%s" -loglevel quiet', "/mp3"],
             ".webm": ['ffmpeg -y -i "%s" "%s" -loglevel quiet', "/mov"],
             ".mkv": ['ffmpeg -y -i "%s" -vcodec copy "%s" -loglevel quiet', "/mov"],
         }
-        root, ext = os.path.splitext(data)
+        root, ext = os.path.splitext(file)
         formats = ext_dict.get(ext)
         if formats != None and formats[1] == self.tag:
             if ext != ".mp4" and self.tag == "/mov":
                 cnv_mp4 = "%s.mp4" % root
-                data = cnv_mp4
+                file = cnv_mp4
                 cmd = formats[0] % (root + ext, cnv_mp4)
                 os.system(cmd)
                 os.remove(root + ext)
             else:
                 cnv_mp3 = "%s.mp3" % root
-                data = cnv_mp3
+                file = cnv_mp3
                 cmd = formats[0] % (root + ext, cnv_mp3)
                 os.system(cmd)
                 os.remove(root + ext)
 
         if self.lineapi:
-            uploader(self.tag, data, self.dir, self.lineapi, self.lineid)
+            uploader(self.tag, file, self.dir, self.lineapi, self.lineid)

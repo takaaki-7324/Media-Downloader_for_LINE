@@ -98,7 +98,9 @@ def line(event):
                 dl = Download(url, tag, line_bot_api, lineid)
                 try:
                     dl.downloader()
+                    dl.runner()
                 except Exception as e:
+                    print(e)
                     error_message = f"エラーが発生しました。\n{e.args[0]}"
                     line_bot_api.reply_message_with_http_info(
                         ReplyMessageRequest(
@@ -117,7 +119,6 @@ def line(event):
                             messages=[TextMessage(text=complete_message)],
                         )
                     )
-                    dl.runner()
 
 
 if __name__ == "__main__":
