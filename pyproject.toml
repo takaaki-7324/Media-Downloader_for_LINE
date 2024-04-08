@@ -1,5 +1,30 @@
 [build-system]
-requires = [
-    "setuptools",
-]
+requires = ["wheel", "setuptools"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = []
+
+[project]
+name = "Media-Downloader_for_LINE"
+version = "2022.2.27"
+description = "LINEからメディアをダウンロードするツール"
+readme = {file = "README.md", content-type = "text/markdown"}
+dependencies = [
+    "pip>=24.0",
+    "Flask",
+    "line-bot-sdk",
+    "mutagen",
+    "PyDrive",
+    "oauth2client",
+    "requests",
+    "yt-dlp",
+    "python-dotenv",
+    "pathos",
+    "httplib2==0.15.0"
+]
+
+[tool.pytest.ini_options]
+addopts = "-vv --durations=0 --capture=no"
+filterwarnings = ["ignore::DeprecationWarning","ignore:ssl.PROTOCOL_TLS is deprecated"]
+python_files = ["tests/test_download_to_convert.py"]
