@@ -14,7 +14,9 @@ jobs:
         python-version: ['3.11','3.12']
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
@@ -53,7 +55,7 @@ jobs:
         echo "::set-output name=pytest_result::$result"
       continue-on-error: true
 
-    - uses: actions/github-script@v6
+    - uses: actions/github-script@0.9.0
       if: github.event_name == 'pull_request'
       env:
         PYTEST: "[Pytest ${{ matrix.python-version }}]\n${{ steps.pytest.outputs.pytest_result }}"
