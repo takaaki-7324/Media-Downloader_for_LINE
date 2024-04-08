@@ -53,7 +53,7 @@ jobs:
         echo "::set-output name=pytest_result::$result"
       continue-on-error: true
 
-    - uses: actions/github-script@v7
+    - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
       env:
         PYTEST: "[Pytest ${{ matrix.python-version }}]\n${{ steps.pytest.outputs.pytest_result }}"
